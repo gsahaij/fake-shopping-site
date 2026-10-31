@@ -5,3 +5,5 @@ main { padding: 2rem; }
 article { background: #fff; padding: 1rem; border-radius: 8px; box-shadow: 0 1px 3px #0002; }
 button { cursor: pointer; border: 0; border-radius: 4px; padding: .4rem .8rem; background: #6c5ce7; color: #fff; }
 #cart { margin-top: 2rem; background: #fff; padding: 1rem; border-radius: 8px; }
+.promo { display: flex; gap: .5rem; margin: .5rem 0; }
+.promo input { flex: 1; padding: .4rem; }
