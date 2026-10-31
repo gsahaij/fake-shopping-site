@@ -1,12 +1,17 @@
 import { products } from "./products.js";
+import { discountCents } from "./promo.js";
 import { addItem, removeItem, countItems, totalCents, formatCents } from "./cart.js";
 
 let cart = {};
+let promo = "";
 const $ = (id) => document.getElementById(id);
 
 function render() {
   $("cart-count").textContent = countItems(cart);
-  $("cart-total").textContent = formatCents(totalCents(cart, products));
+  const sub = totalCents(cart, products);
+  const disc = discountCents(promo, sub);
+  $("cart-discount").textContent = `-${formatCents(disc)}`;
+  $("cart-total").textContent = formatCents(sub - disc);
   $("cart-items").innerHTML = Object.entries(cart)
     .map(([id, qty]) => {
       const p = products.find((x) => x.id === Number(id));
@@ -25,6 +30,12 @@ document.addEventListener("click", (e) => {
   else if (t.dataset.remove) cart = removeItem(cart, t.dataset.remove);
   else if (t.id === "cart-toggle") $("cart").hidden = !$("cart").hidden;
   else return;
+  render();
+});
+$("promo-form").addEventListener("submit", (e) => {
+  e.preventDefault();
+  promo = $("promo-input").value;
+  $("promo-msg").textContent = promo && discountCents(promo, 1e6) === 0 ? "Code not recognised" : "";
   render();
 });
 render();
