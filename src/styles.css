@@ -1,0 +1,7 @@
+body { font-family: system-ui, sans-serif; margin: 0; background: #f6f6f9; color: #222; }
+header { display: flex; justify-content: space-between; align-items: center; padding: 1rem 2rem; background: #3b2f8f; color: #fff; }
+main { padding: 2rem; }
+.grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 1rem; }
+article { background: #fff; padding: 1rem; border-radius: 8px; box-shadow: 0 1px 3px #0002; }
+button { cursor: pointer; border: 0; border-radius: 4px; padding: .4rem .8rem; background: #6c5ce7; color: #fff; }
+#cart { margin-top: 2rem; background: #fff; padding: 1rem; border-radius: 8px; }
