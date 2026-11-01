@@ -6,6 +6,7 @@ A tiny static storefront (no build step) for experimenting.
 - `src/products.js` – product catalog
 - `src/cart.js` – pure cart logic (add/remove/total)
 - `src/promo.js` – promo codes (try `DUCK10`, `FIVEOFF`)
+- `src/search.js` – product search and sorting
 - `src/styles.css` – basic styling
 - `src/app.js` – DOM rendering
 - `test/` – unit tests

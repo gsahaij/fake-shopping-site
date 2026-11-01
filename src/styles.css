@@ -7,3 +7,6 @@ button { cursor: pointer; border: 0; border-radius: 4px; padding: .4rem .8rem; b
 #cart { margin-top: 2rem; background: #fff; padding: 1rem; border-radius: 8px; }
 .promo { display: flex; gap: .5rem; margin: .5rem 0; }
 .promo input { flex: 1; padding: .4rem; }
+.toolbar { display: flex; gap: .5rem; margin-bottom: 1rem; }
+.toolbar input { flex: 1; padding: .4rem; }
+.toolbar select { padding: .4rem; }
