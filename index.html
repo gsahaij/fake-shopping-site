@@ -9,6 +9,15 @@
 <body>
   <header><h1>Fake Shop</h1><button id="cart-toggle">Cart (<span id="cart-count">0</span>)</button></header>
   <main>
+    <div class="toolbar">
+      <input id="search" type="search" placeholder="Search products" aria-label="Search products">
+      <select id="sort" aria-label="Sort products">
+        <option value="default">Featured</option>
+        <option value="price-asc">Price: low to high</option>
+        <option value="price-desc">Price: high to low</option>
+        <option value="name">Name</option>
+      </select>
+    </div>
     <section id="products" class="grid" aria-label="Products"></section>
     <aside id="cart" hidden aria-label="Shopping cart">
       <h2>Your cart</h2>
