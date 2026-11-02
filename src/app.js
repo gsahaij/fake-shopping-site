@@ -1,15 +1,17 @@
 import { products } from "./products.js";
 import { discountCents } from "./promo.js";
 import { visibleProducts } from "./search.js";
+import { loadCart, saveCart } from "./storage.js";
 import { addItem, removeItem, countItems, totalCents, formatCents } from "./cart.js";
 
-let cart = {};
+let cart = loadCart(window.localStorage, products);
 let promo = "";
 let query = "";
 let sortMode = "default";
 const $ = (id) => document.getElementById(id);
 
 function render() {
+  saveCart(window.localStorage, cart);
   $("cart-count").textContent = countItems(cart);
   const sub = totalCents(cart, products);
   const disc = discountCents(promo, sub);
