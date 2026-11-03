@@ -8,6 +8,7 @@ A tiny static storefront (no build step) for experimenting.
 - `src/promo.js` – promo codes (try `DUCK10`, `FIVEOFF`)
 - `src/search.js` – product search and sorting
 - `src/storage.js` – cart persistence in localStorage (survives reloads)
+- `src/shipping.js` – flat-rate shipping, free over $35, with progress helper
 - `src/styles.css` – basic styling
 - `src/app.js` – DOM rendering
 - `test/` – unit tests

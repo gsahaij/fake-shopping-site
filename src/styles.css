@@ -10,3 +10,4 @@ button { cursor: pointer; border: 0; border-radius: 4px; padding: .4rem .8rem; b
 .toolbar { display: flex; gap: .5rem; margin-bottom: 1rem; }
 .toolbar input { flex: 1; padding: .4rem; }
 .toolbar select { padding: .4rem; }
+#ship-bar { width: 100%; accent-color: #6c5ce7; }

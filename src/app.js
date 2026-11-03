@@ -1,6 +1,7 @@
 import { products } from "./products.js";
 import { discountCents } from "./promo.js";
 import { visibleProducts } from "./search.js";
+import { shippingCents, remainingForFreeShipping, freeShippingProgress } from "./shipping.js";
 import { loadCart, saveCart } from "./storage.js";
 import { addItem, removeItem, countItems, totalCents, formatCents } from "./cart.js";
 
@@ -16,7 +17,13 @@ function render() {
   const sub = totalCents(cart, products);
   const disc = discountCents(promo, sub);
   $("cart-discount").textContent = `-${formatCents(disc)}`;
-  $("cart-total").textContent = formatCents(sub - disc);
+  const after = sub - disc;
+  const ship = shippingCents(after);
+  $("cart-shipping").textContent = ship ? formatCents(ship) : "FREE";
+  $("cart-total").textContent = formatCents(after + ship);
+  const left = remainingForFreeShipping(after);
+  $("ship-msg").textContent = after === 0 ? "" : left ? `Add ${formatCents(left)} more for free shipping` : "You've unlocked free shipping!";
+  $("ship-bar").value = freeShippingProgress(after);
   $("cart-items").innerHTML = Object.entries(cart)
     .map(([id, qty]) => {
       const p = products.find((x) => x.id === Number(id));
