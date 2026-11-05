@@ -4,7 +4,7 @@ A tiny static storefront (no build step) for experimenting.
 
 - `index.html` – page shell
 - `src/products.js` – product catalog
-- `src/cart.js` – pure cart logic (add/remove/total)
+- `src/cart.js` – pure cart logic (add/remove/clear, totals, line items)
 - `src/promo.js` – promo codes (try `DUCK10`, `FIVEOFF`)
 - `src/search.js` – product search and sorting
 - `src/storage.js` – cart persistence in localStorage (survives reloads)

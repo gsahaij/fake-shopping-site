@@ -25,3 +25,17 @@ export function totalCents(cart, products) {
 export function formatCents(c) {
   return `$${(c / 100).toFixed(2)}`;
 }
+
+// Line items for display: [{ id, name, qty, unitCents, lineCents }], skipping unknown products.
+export function cartLines(cart, products) {
+  return Object.entries(cart).flatMap(([id, qty]) => {
+    const p = products.find((x) => x.id === Number(id));
+    if (!p) return [];
+    const unitCents = Math.round(p.price * 100);
+    return [{ id: p.id, name: p.name, qty, unitCents, lineCents: unitCents * qty }];
+  });
+}
+
+export function clearCart() {
+  return {};
+}

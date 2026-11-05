@@ -11,3 +11,6 @@ button { cursor: pointer; border: 0; border-radius: 4px; padding: .4rem .8rem; b
 .toolbar input { flex: 1; padding: .4rem; }
 .toolbar select { padding: .4rem; }
 #ship-bar { width: 100%; accent-color: #6c5ce7; }
+
+#cart-items .line-total { margin: 0 .5rem; font-weight: 600; }
+#clear-cart { margin: .5rem 0; }
