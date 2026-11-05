@@ -3,7 +3,7 @@ import { discountCents } from "./promo.js";
 import { visibleProducts } from "./search.js";
 import { shippingCents, remainingForFreeShipping, freeShippingProgress } from "./shipping.js";
 import { loadCart, saveCart } from "./storage.js";
-import { addItem, removeItem, countItems, totalCents, formatCents } from "./cart.js";
+import { addItem, removeItem, countItems, totalCents, formatCents, cartLines, clearCart } from "./cart.js";
 
 let cart = loadCart(window.localStorage, products);
 let promo = "";
@@ -24,12 +24,13 @@ function render() {
   const left = remainingForFreeShipping(after);
   $("ship-msg").textContent = after === 0 ? "" : left ? `Add ${formatCents(left)} more for free shipping` : "You've unlocked free shipping!";
   $("ship-bar").value = freeShippingProgress(after);
-  $("cart-items").innerHTML = Object.entries(cart)
-    .map(([id, qty]) => {
-      const p = products.find((x) => x.id === Number(id));
-      return `<li>${p.name} × ${qty} <button data-remove="${id}">−</button></li>`;
-    })
-    .join("");
+  const lines = cartLines(cart, products);
+  $("cart-items").innerHTML = lines.length
+    ? lines
+        .map((l) => `<li>${l.name} × ${l.qty} <span class="line-total">${formatCents(l.lineCents)}</span> <button data-remove="${l.id}" aria-label="Remove one ${l.name}">−</button> <button data-add="${l.id}" aria-label="Add one ${l.name}">+</button></li>`)
+        .join("")
+    : "<li>Your cart is empty.</li>";
+  $("clear-cart").hidden = lines.length === 0;
 }
 
 function renderProducts() {
@@ -46,6 +47,7 @@ document.addEventListener("click", (e) => {
   const t = e.target;
   if (t.dataset.add) cart = addItem(cart, t.dataset.add);
   else if (t.dataset.remove) cart = removeItem(cart, t.dataset.remove);
+  else if (t.id === "clear-cart") cart = clearCart();
   else if (t.id === "cart-toggle") $("cart").hidden = !$("cart").hidden;
   else return;
   render();
