@@ -11,3 +11,5 @@ button { cursor: pointer; border: 0; border-radius: 4px; padding: .4rem .8rem; b
 .toolbar input { flex: 1; padding: .4rem; }
 .toolbar select { padding: .4rem; }
 #ship-bar { width: 100%; accent-color: #6c5ce7; }
+.wish { background: #fff; color: #c0392b; border: 1px solid #c0392b; }
+#wish-toggle[aria-pressed="true"] { background: #c0392b; }
