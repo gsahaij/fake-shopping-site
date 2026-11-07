@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Checkout – Fake Shop</title>
+  <link rel="stylesheet" href="src/styles.css">
+  <link rel="stylesheet" href="src/checkout.css">
+</head>
+<body>
+  <header><h1>Checkout</h1><a href="index.html" class="back">← Back to shop</a></header>
+  <main>
+    <p>Demo only: no payment is processed. Try card 4242 4242 4242 4242.</p>
+    <form id="checkout-form" novalidate>
+      <label>Full name <input name="name" autocomplete="name"></label><span class="err" data-err="name" aria-live="polite"></span>
+      <label>Email <input name="email" type="email" autocomplete="email"></label><span class="err" data-err="email" aria-live="polite"></span>
+      <label>ZIP code <input name="zip" autocomplete="postal-code" inputmode="numeric"></label><span class="err" data-err="zip" aria-live="polite"></span>
+      <label>Card number <input name="card" autocomplete="cc-number" inputmode="numeric"></label><span class="err" data-err="card" aria-live="polite"></span>
+      <label>Expiry (MM/YY) <input name="expiry" autocomplete="cc-exp" placeholder="MM/YY"></label><span class="err" data-err="expiry" aria-live="polite"></span>
+      <label>CVC <input name="cvc" autocomplete="cc-csc" inputmode="numeric"></label><span class="err" data-err="cvc" aria-live="polite"></span>
+      <button type="submit">Place order</button>
+    </form>
+    <p id="result" aria-live="polite"></p>
+  </main>
+  <script type="module" src="src/checkout.js"></script>
+</body>
+</html>
