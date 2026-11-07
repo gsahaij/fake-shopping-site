@@ -1,0 +1,7 @@
+#checkout-form { display: grid; gap: .25rem; max-width: 420px; background: #fff; padding: 1rem; border-radius: 8px; }
+#checkout-form label { display: grid; gap: .25rem; margin-top: .5rem; }
+#checkout-form input { padding: .4rem; }
+#checkout-form input[aria-invalid="true"] { border: 1px solid #c0392b; }
+.err { color: #c0392b; font-size: .85rem; min-height: 1em; }
+#checkout-form button { margin-top: 1rem; }
+.back { color: #fff; }
