@@ -9,6 +9,7 @@ A tiny static storefront (no build step) for experimenting.
 - `src/search.js` – product search and sorting
 - `src/storage.js` – cart persistence in localStorage (survives reloads)
 - `src/shipping.js` – flat-rate shipping, free over $35, with progress helper
+- `src/tax.js` – estimated sales tax by state (pure helpers, demo rates)
 - `src/styles.css` – basic styling
 - `src/app.js` – DOM rendering
 - `test/` – unit tests
