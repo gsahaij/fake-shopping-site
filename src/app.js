@@ -3,6 +3,7 @@ import { discountCents } from "./promo.js";
 import { visibleProducts } from "./search.js";
 import { shippingCents, remainingForFreeShipping, freeShippingProgress } from "./shipping.js";
 import { loadCart, saveCart } from "./storage.js";
+import { cartLines } from "./lines.js";
 import { addItem, removeItem, countItems, totalCents, formatCents } from "./cart.js";
 
 let cart = loadCart(window.localStorage, products);
@@ -24,11 +25,8 @@ function render() {
   const left = remainingForFreeShipping(after);
   $("ship-msg").textContent = after === 0 ? "" : left ? `Add ${formatCents(left)} more for free shipping` : "You've unlocked free shipping!";
   $("ship-bar").value = freeShippingProgress(after);
-  $("cart-items").innerHTML = Object.entries(cart)
-    .map(([id, qty]) => {
-      const p = products.find((x) => x.id === Number(id));
-      return `<li>${p.name} × ${qty} <button data-remove="${id}">−</button></li>`;
-    })
+  $("cart-items").innerHTML = cartLines(cart, products)
+    .map((l) => `<li>${l.name} × ${l.qty} — ${formatCents(l.lineCents)} <button data-remove="${l.id}" aria-label="Remove one ${l.name}">−</button> <button data-add="${l.id}" aria-label="Add one ${l.name}">+</button></li>`)
     .join("");
 }
 
