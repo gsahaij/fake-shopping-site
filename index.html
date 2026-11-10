@@ -7,7 +7,7 @@
   <link rel="stylesheet" href="src/styles.css">
 </head>
 <body>
-  <header><h1>Fake Shop</h1><button id="cart-toggle">Cart (<span id="cart-count">0</span>)</button></header>
+  <header><h1>Fake Shop</h1><button id="wish-toggle">Wishlist (<span id="wish-count">0</span>)</button><button id="cart-toggle">Cart (<span id="cart-count">0</span>)</button></header>
   <main>
     <div class="toolbar">
       <input id="search" type="search" placeholder="Search products" aria-label="Search products">
@@ -19,6 +19,10 @@
       </select>
     </div>
     <section id="products" class="grid" aria-label="Products"></section>
+    <aside id="wishlist" hidden aria-label="Wishlist">
+      <h2>Your wishlist</h2>
+      <ul id="wishlist-items"></ul>
+    </aside>
     <aside id="cart" hidden aria-label="Shopping cart">
       <h2>Your cart</h2>
       <ul id="cart-items"></ul>
