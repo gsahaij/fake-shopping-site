@@ -10,6 +10,7 @@ A tiny static storefront (no build step) for experimenting.
 - `src/storage.js` – cart persistence in localStorage (survives reloads)
 - `src/shipping.js` – flat-rate shipping, free over $35, with progress helper
 - `src/lines.js` – cart line items with per-line totals, plus remove-all helper
+- `src/wishlist.js` – wishlist toggle/persistence (heart button on each product)
 - `src/styles.css` – basic styling
 - `src/app.js` – DOM rendering
 - `test/` – unit tests
