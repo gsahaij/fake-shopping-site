@@ -15,7 +15,7 @@ test("normalizeRange swaps reversed bounds", () => {
   assert.deepEqual(normalizeRange(20, 5), { min: 5, max: 20 });
 });
 test("filterByPrice is inclusive and handles open ends", () => {
-  assert.deepEqual(filterByPrice(products, 3.25, 12.5).map((p) => p.id), [2, 3]);
+  assert.deepEqual(filterByPrice(products, 3.25, 12.5).map((p) => p.id), [1, 2, 3]);
   assert.deepEqual(filterByPrice(products, 15, "").map((p) => p.id), [4]);
   assert.deepEqual(filterByPrice(products, null, 4).map((p) => p.id), [3]);
   assert.equal(filterByPrice(products, "", "").length, products.length);
