@@ -4,9 +4,11 @@ import { visibleProducts } from "./search.js";
 import { shippingCents, remainingForFreeShipping, freeShippingProgress } from "./shipping.js";
 import { loadCart, saveCart } from "./storage.js";
 import { cartLines, clearItem, lineLabel } from "./lines.js";
+import { loadWishlist, saveWishlist, toggleWish, isWished, wishedProducts } from "./wishlist.js";
 import { addItem, removeItem, countItems, totalCents, formatCents } from "./cart.js";
 
 let cart = loadCart(window.localStorage, products);
+let wishlist = loadWishlist(window.localStorage, products);
 let promo = "";
 let query = "";
 let sortMode = "default";
@@ -33,18 +35,28 @@ function render() {
 function renderProducts() {
   const list = visibleProducts(products, query, sortMode);
   $("products").innerHTML = list.length
-    ? list.map((p) => `<article><h3>${p.name}</h3><p>${formatCents(Math.round(p.price * 100))}</p><button data-add="${p.id}">Add to cart</button></article>`).join("")
+    ? list.map((p) => `<article><h3>${p.name}</h3><p>${formatCents(Math.round(p.price * 100))}</p><button data-add="${p.id}">Add to cart</button> <button class="wish" data-wish="${p.id}" aria-pressed="${isWished(wishlist, p.id)}" aria-label="${isWished(wishlist, p.id) ? "Remove" : "Add"} ${p.name} ${isWished(wishlist, p.id) ? "from" : "to"} wishlist">${isWished(wishlist, p.id) ? "♥" : "♡"}</button></article>`).join("")
     : "<p>No products match your search.</p>";
 }
 $("search").addEventListener("input", (e) => { query = e.target.value; renderProducts(); });
 $("sort").addEventListener("change", (e) => { sortMode = e.target.value; renderProducts(); });
 renderProducts();
 
+function renderWishlist() {
+  saveWishlist(window.localStorage, wishlist);
+  $("wish-count").textContent = wishlist.length;
+  $("wish-items").innerHTML = wishedProducts(wishlist, products)
+    .map((p) => `<li>${p.name} — ${formatCents(Math.round(p.price * 100))} <button data-add="${p.id}">Add to cart</button><button data-wish="${p.id}" aria-label="Remove ${p.name} from wishlist">✕</button></li>`)
+    .join("") || "<li>Nothing saved yet.</li>";
+}
+
 document.addEventListener("click", (e) => {
   const t = e.target;
   if (t.dataset.add) cart = addItem(cart, t.dataset.add);
   else if (t.dataset.clear) cart = clearItem(cart, t.dataset.clear);
   else if (t.dataset.remove) cart = removeItem(cart, t.dataset.remove);
+  else if (t.dataset.wish) { wishlist = toggleWish(wishlist, t.dataset.wish); renderProducts(); renderWishlist(); return; }
+  else if (t.id === "wish-toggle") { $("wishlist").hidden = !$("wishlist").hidden; return; }
   else if (t.id === "cart-toggle") $("cart").hidden = !$("cart").hidden;
   else return;
   render();
@@ -56,3 +68,4 @@ $("promo-form").addEventListener("submit", (e) => {
   render();
 });
 render();
+renderWishlist();
