@@ -1,6 +1,6 @@
 import test from "node:test";
 import assert from "node:assert/strict";
-import { cartLines, clearItem, lineLabel } from "../src/lines.js";
+import { cartLines, clearItem, clearCart, emptyCartMessage, lineLabel } from "../src/lines.js";
 
 const products = [
   { id: 1, name: "Rubber Duck", price: 4.99 },
@@ -24,4 +24,14 @@ test("clearItem removes a whole line without mutating", () => {
 
 test("lineLabel formats name, quantity and total", () => {
   assert.equal(lineLabel(cartLines({ 2: 2 }, products)[0]), "Mystery Mug × 2 — $25.00");
+});
+
+test("clearCart returns an empty cart", () => {
+  assert.deepEqual(clearCart(), {});
+});
+
+test("emptyCartMessage only shows when there are no valid lines", () => {
+  assert.match(emptyCartMessage({}, products), /empty/);
+  assert.match(emptyCartMessage({ 99: 2 }, products), /empty/);
+  assert.equal(emptyCartMessage({ 1: 1 }, products), "");
 });
