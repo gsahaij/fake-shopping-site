@@ -19,3 +19,13 @@ export function clearItem(cart, id) {
 export function lineLabel(line) {
   return `${line.name} × ${line.qty} — ${formatCents(line.lineCents)}`;
 }
+
+// Empties the whole cart (returns a new, empty cart).
+export function clearCart() {
+  return {};
+}
+
+// Friendly message shown when the cart has no purchasable lines.
+export function emptyCartMessage(cart, products) {
+  return cartLines(cart, products).length === 0 ? "Your cart is empty — add something shiny!" : "";
+}

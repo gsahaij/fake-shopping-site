@@ -3,7 +3,7 @@ import { discountCents } from "./promo.js";
 import { visibleProducts } from "./search.js";
 import { shippingCents, remainingForFreeShipping, freeShippingProgress } from "./shipping.js";
 import { loadCart, saveCart } from "./storage.js";
-import { cartLines, clearItem, lineLabel } from "./lines.js";
+import { cartLines, clearItem, clearCart, emptyCartMessage, lineLabel } from "./lines.js";
 import { addItem, removeItem, countItems, totalCents, formatCents } from "./cart.js";
 
 let cart = loadCart(window.localStorage, products);
@@ -25,6 +25,9 @@ function render() {
   const left = remainingForFreeShipping(after);
   $("ship-msg").textContent = after === 0 ? "" : left ? `Add ${formatCents(left)} more for free shipping` : "You've unlocked free shipping!";
   $("ship-bar").value = freeShippingProgress(after);
+  const emptyMsg = emptyCartMessage(cart, products);
+  $("cart-empty").textContent = emptyMsg;
+  $("clear-cart").hidden = emptyMsg !== "";
   $("cart-items").innerHTML = cartLines(cart, products)
     .map((l) => `<li>${lineLabel(l)} <button data-remove="${l.id}" aria-label="Remove one ${l.name}">−</button><button data-add="${l.id}" aria-label="Add one ${l.name}">+</button><button data-clear="${l.id}" aria-label="Remove all ${l.name}">✕</button></li>`)
     .join("");
@@ -44,6 +47,7 @@ document.addEventListener("click", (e) => {
   const t = e.target;
   if (t.dataset.add) cart = addItem(cart, t.dataset.add);
   else if (t.dataset.clear) cart = clearItem(cart, t.dataset.clear);
+  else if (t.id === "clear-cart") cart = clearCart();
   else if (t.dataset.remove) cart = removeItem(cart, t.dataset.remove);
   else if (t.id === "cart-toggle") $("cart").hidden = !$("cart").hidden;
   else return;
